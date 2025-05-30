@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
  
-
+//nhanh buoi 2
 @SpringBootApplication
 
 public class Application {
