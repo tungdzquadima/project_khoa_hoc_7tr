@@ -1,5 +1,6 @@
 package com.laptrinhjavaweb.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.laptrinhjavaweb.bean.BuildingBean;
+import com.laptrinhjavaweb.bean.ErrorResponBean;
 
 //@Controller 
 @RestController
@@ -32,20 +34,37 @@ public class BuildingAPI {
 		}
 		return null;
 	}
-	@GetMapping("/api/building")
-	public @ResponseBody BuildingBean getDetail(@PathVariable("buildingid") Long buildingId){
-		System.out.println(buildingId);
-		return null;
-	}
+//	@GetMapping("/api/building")
+//	public  BuildingBean getDetail(@PathVariable("buildingid") Long buildingId){
+//		System.out.println(buildingId);
+//		return null;
+//	}
 	
+//	@PostMapping("/api/building")
+//	public  BuildingBean createBuilding(@RequestBody BuildingBean newBuilding){	
+//		System.out.print(newBuilding.toString());
+//		return newBuilding;
+//	}
+	
+	// sử lý trả ra exeption
 	@PostMapping("/api/building")
-	public 	 BuildingBean createBuilding(@RequestBody BuildingBean newBuilding){	
-		System.out.print(newBuilding.toString());
-		return newBuilding;
+	public  Object createBuilding(@RequestBody BuildingBean newBuilding){	
+		try {
+			System.out.println(10/0);
+			return newBuilding;
+		}catch(Exception e){
+			// return error
+			 ErrorResponBean errorResponBean=new ErrorResponBean();
+			 errorResponBean.setError(e.getMessage());
+			 List<String> details=new ArrayList<>();
+			 details.add("lỗi chia cho ko");
+			 errorResponBean.setDetails(details);
+			 return errorResponBean;
+		}
 	}
 	
 	@PutMapping("/api/building")
-	public @ResponseBody BuildingBean updateBuilding(@RequestBody BuildingBean updateBuilding){
+	public  BuildingBean updateBuilding(@RequestBody BuildingBean updateBuilding){
 		System.out.println(updateBuilding);
 		return null;
 	}
