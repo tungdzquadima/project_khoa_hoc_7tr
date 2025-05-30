@@ -1,5 +1,7 @@
 package com.laptrinhjavaweb.bean;
 
+import java.util.Arrays;
+
 public class BuildingBean {
 
 	private Long id;
@@ -30,6 +32,11 @@ public class BuildingBean {
 	}
 	public void setBuildingIds(Long[] buildingIds) {
 		this.buildingIds = buildingIds;
+	}
+	@Override
+	public String toString() {
+		return "BuildingBean [id=" + id + ", name=" + name + ", floorArea=" + floorArea + ", buildingIds="
+				+ Arrays.toString(buildingIds) + "]";
 	}
 
 }
