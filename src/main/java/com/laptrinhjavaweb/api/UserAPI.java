@@ -13,12 +13,12 @@ public class UserAPI {
 	
 		//@RequestMapping(value = "/api/building", method = RequestMethod.GET)
 		//@ResponseBody // khi dùng @RestController thì ko cần cái này nữa
-		@GetMapping("/api/staff")
-		public  List<UserBean> getStaff(@RequestParam(value = "buildingId", required = false) Long buildingId 												
-				){
-			List<UserBean> results=new ArrayList<>();
-			return results;
-			}
+//		@GetMapping("/api/staff")
+//		public  List<UserBean> getStaff(@RequestParam(value = "buildingId", required = false) Long buildingId 												
+//				){
+//			List<UserBean> results=new ArrayList<>();
+//			return results;
+//			}
 		
 		
 		@GetMapping("/api/users")

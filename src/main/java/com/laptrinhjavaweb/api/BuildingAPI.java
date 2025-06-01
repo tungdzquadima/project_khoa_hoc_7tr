@@ -9,19 +9,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.laptrinhjavaweb.bean.BuildingBean;
 import com.laptrinhjavaweb.bean.ErrorResponBean;
+import com.laptrinhjavaweb.customxception.FieldRequiredException;
 
 //@Controller 
 @RestController
+@RequestMapping("/api/building")
 public class BuildingAPI {
 	//@RequestMapping(value = "/api/building", method = RequestMethod.GET)
 	//@ResponseBody // khi dùng @RestController thì ko cần cái này nữa
-	@GetMapping("/api/building")
+	@GetMapping
 	public  List<BuildingBean> getBuilding(@RequestParam(value = "name", required = false) String name ,
 														@RequestParam(value = "numberOfBasement", required = false) Integer numberOfBasement ,
 														//@RequestParam(value = "types", required = false) String[] types 
@@ -47,26 +50,35 @@ public class BuildingAPI {
 //	}
 	
 	// sử lý trả ra exeption
-	@PostMapping("/api/building")
-	public  Object createBuilding(@RequestBody BuildingBean newBuilding){	
-		try {
-			System.out.println(10/0);
-			return newBuilding;
-		}catch(Exception e){
-			// return error
-			 ErrorResponBean errorResponBean=new ErrorResponBean();
-			 errorResponBean.setError(e.getMessage());
-			 List<String> details=new ArrayList<>();
-			 details.add("lỗi chia cho ko");
-			 errorResponBean.setDetails(details);
-			 return errorResponBean;
-		}
+	@PostMapping
+	public  Object createBuilding(@RequestBody BuildingBean newBuilding) {	
+//		try {
+//			System.out.println(10/0);
+//			return newBuilding;
+//		}catch(ArithmeticException e){
+//			// return error
+//			 ErrorResponBean errorResponBean=new ErrorResponBean();
+//			 errorResponBean.setError(e.getMessage());
+//			 List<String> details=new ArrayList<>();
+//			 details.add("lỗi chia cho ko");
+//			 errorResponBean.setDetails(details);
+//			 return errorResponBean;
+//		}
+		vaiadateData(newBuilding);
+		return newBuilding;
+		
+		
 	}
 	
-	@PutMapping("/api/building")
+	private void vaiadateData(BuildingBean newBuilding){
+			if(newBuilding.getName()== null ||newBuilding.getName().equals("") || newBuilding.getNumberOfBasement()==null) {
+				throw new FieldRequiredException("name or nnumberOfBasement == null");
+			}
+}
+	@PutMapping
 	public  BuildingBean updateBuilding(@RequestBody BuildingBean updateBuilding){
 		System.out.println(updateBuilding);
-		return null;
+		return updateBuilding;
 	}
 	
 	@DeleteMapping("/api/building")

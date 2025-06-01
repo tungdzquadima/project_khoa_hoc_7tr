@@ -8,7 +8,14 @@ public class BuildingBean {
 	private String name;
 	private Integer floorArea;
 	private Long[] buildingIds;
+	private Integer numberOfBasement;
 	
+	public Integer getNumberOfBasement() {
+		return numberOfBasement;
+	}
+	public void setNumberOfBasement(Integer newnumberOfBasement) {
+		this.numberOfBasement = newnumberOfBasement;
+	}
 	public String getName() {
 		return name;
 	}
